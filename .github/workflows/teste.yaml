@@ -18,6 +18,7 @@ jobs:
 
       - name: Update environment.prod.ts
         run: |
+          pwd
           branch="${{ steps.branch.outputs.name }}"
           if [ "$branch" = "dev" ]; then
             sed -i 's|baseUrl: ".*"|baseUrl: "https://0730.otimiza-homologa.sicredi.net"|g' teste-workflow/src/environments/environment.prod.ts
