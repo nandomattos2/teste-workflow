@@ -19,16 +19,20 @@ jobs:
       - name: Update environment.prod.ts
         run: |
           pwd
-          branch="${{ steps.branch.outputs.name }}"
-          if [ "$branch" = "dev" ]; then
-            sed -i 's|baseUrl: ".*"|baseUrl: 'https://0730.otimiza-homologa.sicredi.net'|g' src/environments/environment.prod.ts
-          elif [ "$branch" = "main" ]; then
-            sed -i 's|baseUrl: ".*"|baseUrl: 'https://0730.otimiza.sicredi.net'|g' src/environments/environment.prod.ts
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            CONFIG="export const environment = {
+            production: true,
+            baseUrl: 'https://0730.otimiza.sicredi.net',
+            skipAuth: false,
+            };"
           else
-            echo "Unsupported branch"
+            CONFIG="export const environment = {
+            production: true,
+            baseUrl: 'https://0730.otimiza-homologa.sicredi.net',
+            skipAuth: false,
+            };"
           fi
-          cat src/environments/environment.prod.ts
-
+          echo CONFIG > src/evironments/environment.prod.ts
       - name: Commit changes
         run: |
           git config --local user.email "actions@github.com"
