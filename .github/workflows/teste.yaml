@@ -20,19 +20,18 @@ jobs:
         run: |
           branch="${{ steps.branch.outputs.name }}"
           if [ "$branch" = "dev" ]; then
-            sed -i 's|baseUrl: ".*"|baseUrl: "https://otz-homologa.com.br"|g' repo/src/environments/environment.prod.ts
+            sed -i 's|baseUrl: ".*"|baseUrl: "https://0730.otimiza-homologa.sicredi.net"|g' teste-workflow/src/environments/environment.prod.ts
           elif [ "$branch" = "main" ]; then
-            sed -i 's|baseUrl: ".*"|baseUrl: "https://otz.com.br"|g' repo/src/environments/environment.prod.ts
+            sed -i 's|baseUrl: ".*"|baseUrl: "https://0730.otimiza.sicredi.net"|g' teste-workflow/src/environments/environment.prod.ts
           else
             echo "Unsupported branch"
-            exit 1
           fi
 
       - name: Commit changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git commit -am "Update baseUrl in environment.prod.ts for branch ${{ steps.branch.outputs.name }}"
+          git commit -am "Atualizar baseUrl para a branch ${{ steps.branch.outputs.name }}"
           git push
 
             
