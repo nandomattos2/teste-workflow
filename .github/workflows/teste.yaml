@@ -42,6 +42,7 @@ jobs:
         run: |
           git config --local user.email "luiz_mattos@sicredi.com.br"
           git config --local user.name "nandomattos2"
+          git add .
           git commit -m "Atualizar environment.prod.ts para a branch ${{ steps.branch.outputs.name }}"
           git push https://${{ env.TOKEN }}@github.com/nandomattos2/teste-workflow
 
