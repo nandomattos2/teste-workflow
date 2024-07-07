@@ -43,7 +43,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git commit -am "Atualizar environment.prod.ts para a branch ${{ steps.branch.outputs.name }}"
-          git push https://${{ env.TOKEN }}@github.com/nandomattos2/teste-workflow -f -Xtheirs
+          git push https://${{ env.TOKEN }}@github.com/nandomattos2/teste-workflow
 
             
       
