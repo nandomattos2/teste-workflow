@@ -22,7 +22,7 @@ jobs:
 
       - name: Update environment.prod.ts
         run: |
-          echo TOKEN: $env.TOKEN
+          echo TOKEN: ${{env.TOKEN}}
           pwd
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             CONFIG="export const environment = {
@@ -38,8 +38,11 @@ jobs:
             };"
           fi
           echo CONFIG > src/environments/environment.prod.ts
+          cat src/environments/environment.prod.ts
       - name: Commit changes
         run: |
+          git config --local user.name nandomattos2
+          git config --local user.email luiz_mattos@sicredi.com.br
           git add .
           git commit -m "Atualizar environment.prod.ts para a branch ${{ steps.branch.outputs.name }}"
           git push https://${{ env.TOKEN }}@github.com/nandomattos2/teste-workflow
